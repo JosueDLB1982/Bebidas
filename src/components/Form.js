@@ -1,14 +1,17 @@
 import { useContext, useState } from "react"
 import { ContextCategories } from "../context/ContextCategories"
+import { ContextRecipes } from "../context/ContextRecipes"
 
 const Form = () => {
 
     const [search, saveSearch] = useState({
-        name: '',
+        ingredient: '',
         category: ''
     })
 
     const {categories} = useContext(ContextCategories)
+
+    const {saveSearchRecipe} = useContext(ContextRecipes)
 
     // Función para leer los contenidos
     const getDataRecipe = e => {
@@ -21,7 +24,13 @@ const Form = () => {
     console.log(categories)
 
     return (
-        <form className="col-12">
+        <form
+            className="col-12"
+            onSubmit={e => {
+                e.preventDefault()
+                saveSearchRecipe(search)
+            }}
+        >
             <fieldset className="text-center">
                 <legend>Busca bebidas por Categoría o Ingrediente</legend>
             </fieldset>
@@ -29,7 +38,7 @@ const Form = () => {
             <div className="row mt-4">
                 <div className="col-md-4">
                     <input
-                        name="name"
+                        name="ingredient"
                         className="form-control"
                         type="text"
                         placeholder="Buscar por Ingrediente"
