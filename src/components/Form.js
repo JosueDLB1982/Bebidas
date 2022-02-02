@@ -11,7 +11,7 @@ const Form = () => {
 
     const {categories} = useContext(ContextCategories)
 
-    const {saveSearchRecipe} = useContext(ContextRecipes)
+    const {saveSearchRecipe, saveConsult} = useContext(ContextRecipes)
 
     // Función para leer los contenidos
     const getDataRecipe = e => {
@@ -21,14 +21,13 @@ const Form = () => {
         })
     }
 
-    console.log(categories)
-
     return (
         <form
             className="col-12"
             onSubmit={e => {
                 e.preventDefault()
                 saveSearchRecipe(search)
+                saveConsult(true)
             }}
         >
             <fieldset className="text-center">
