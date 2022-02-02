@@ -1,8 +1,22 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { ContextCategories } from "../context/ContextCategories"
 
 const Form = () => {
+
+    const [search, saveSearch] = useState({
+        name: '',
+        category: ''
+    })
+
     const {categories} = useContext(ContextCategories)
+
+    // Función para leer los contenidos
+    const getDataRecipe = e => {
+        saveSearch({
+            ...search,
+            [e.target.name] : e.target.value
+        })
+    }
 
     console.log(categories)
 
@@ -19,12 +33,14 @@ const Form = () => {
                         className="form-control"
                         type="text"
                         placeholder="Buscar por Ingrediente"
+                        onChange={getDataRecipe}
                     />
                 </div>
                 <div className="col-md-4">
                     <select
                         className="form-control"
                         name="category"
+                        onChange={getDataRecipe}
                     >
                         <option
                             value={categories}
