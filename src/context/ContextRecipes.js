@@ -5,7 +5,7 @@ export const ContextRecipes = createContext()
 
 const ProviderRecipes = (props) => {
 
-    const [recipe, saveRecipe] = useState([])
+    const [recipes, saveRecipes] = useState([])
 
     // crear el state del context
     const [searchRecipe, saveSearchRecipe] = useState({
@@ -22,7 +22,7 @@ const ProviderRecipes = (props) => {
             const getRecipes = async () => {
                 const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}&c=${category}`
                 const result = await axios.get(url)
-                saveConsult(result.data.drinks)
+                saveRecipes(result.data.drinks)
             }
             getRecipes() 
         }
@@ -34,6 +34,7 @@ const ProviderRecipes = (props) => {
     return (
         <ContextRecipes.Provider
             value={{
+                recipes,
                 saveSearchRecipe,
                 saveConsult
             }}
