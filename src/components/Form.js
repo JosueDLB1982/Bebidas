@@ -1,6 +1,10 @@
+import { useContext } from "react"
+import { ContextCategories } from "../context/ContextCategories"
 
 const Form = () => {
-    
+    const {categories} = useContext(ContextCategories)
+
+    console.log(categories)
 
     return (
         <form className="col-12">
@@ -23,7 +27,7 @@ const Form = () => {
                         name="category"
                     >
                         <option
-                            value=""
+                            value={categories}
                         >
                             -- Selecciona Categoría --
                         </option>
