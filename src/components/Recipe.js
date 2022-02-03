@@ -18,7 +18,7 @@ function getModalStyle() {
 const useStyles = makeStyles(theme => ({
     paper: {
         position: 'absolute',
-        width: 600,
+        width: 400,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
@@ -43,7 +43,19 @@ const Recipe = ({ receta }) => {
 
     // Extraemos los valores del context
     const { recipe, saveIdRecipe, saveRecipe } = useContext(ContextModal)
-    /* console.log(recipe) */
+    
+    // Formatea y muestra los ingredientes
+    const showIngredients = recipe => {
+        let ingredients = []
+        for(let i = 1; i<16; i++) {
+            if(recipe[`strIngredient${i}`]) {
+                ingredients.push(
+                    <li>{recipe[`strIngredient${i}`]} {recipe[`strMeasure${i}`]}</li>
+                )
+            }
+        }
+        return ingredients
+    }
 
     return (
         <div className="col md-4 mb-3">
@@ -76,6 +88,11 @@ const Recipe = ({ receta }) => {
                                 {recipe.strInstructions}
                             </p>
                             <img className="img-fluid my-4" src={recipe.strDrinkThumb} alt={recipe.strDrink}/>
+
+                            <h3>Ingredientes y Cantidades</h3>
+                            <ul>
+                                {showIngredients(recipe)}
+                            </ul>
                         </div>
                     </Modal>
                 </div>
