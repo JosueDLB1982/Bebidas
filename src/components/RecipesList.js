@@ -9,10 +9,10 @@ const RecipesList = () => {
     console.log(recipes)
     return (
         <div className="row mt-5">
-            {recipes.map(recipe => (
+            {recipes.map(receta => (
                 <Recipe
-                    key={recipe.idDrink}
-                    recipe={recipe}
+                    key={receta.idDrink}
+                    receta={receta}
                 />
             ))}
         </div>

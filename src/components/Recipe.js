@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Recipe = ({ recipe }) => {
+const Recipe = ({ receta }) => {
 
     //configuración del modal de material-ui
     const [modalStyle] = useState(getModalStyle)
@@ -42,19 +42,20 @@ const Recipe = ({ recipe }) => {
     }
 
     // Extraemos los valores del context
-    const { saveIdRecipe } = useContext(ContextModal)
+    const { recipe, saveIdRecipe, saveRecipe } = useContext(ContextModal)
+    /* console.log(recipe) */
 
     return (
         <div className="col md-4 mb-3">
             <div className="card">
-                <h2 className="card-header">{recipe.strDrink}</h2>
-                <img className="card-img-top" src={recipe.strDrinkThumb} alt={`Imagen de ${recipe.strDrink}`} />
+                <h2 className="card-header">{receta.strDrink}</h2>
+                <img className="card-img-top" src={receta.strDrinkThumb} alt={`Imagen de ${receta.strDrink}`} />
                 <div className="card-body">
                     <button
                         type="button"
                         className="btn btn-block btn-primary"
                         onClick={() => {
-                            saveIdRecipe(recipe.idDrink)
+                            saveIdRecipe(receta.idDrink)
                             handleOpen()
                         }}
                     >
@@ -64,11 +65,17 @@ const Recipe = ({ recipe }) => {
                         open={open}
                         onClose={() => {
                             saveIdRecipe(null)
+                            saveRecipe({})
                             handleClouse()
                         }}
                     >
                         <div style={modalStyle} className={classes.paper}>
-                            <h1>Desde Modal</h1>
+                            <h2>{recipe.strDrink}</h2>
+                            <h3 className="mt-4">Instrucciones</h3>
+                            <p>
+                                {recipe.strInstructions}
+                            </p>
+                            <img className="img-fluid my-4" src={recipe.strDrinkThumb} alt={recipe.strDrink}/>
                         </div>
                     </Modal>
                 </div>

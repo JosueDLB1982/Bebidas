@@ -26,7 +26,9 @@ const ProviderModal = (props) => {
     return (
         <ContextModal.Provider
             value={{
-                saveIdRecipe
+                recipe,
+                saveIdRecipe,
+                saveRecipe
             }}
         >
             {props.children}
